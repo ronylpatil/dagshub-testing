@@ -1,4 +1,5 @@
 import mlflow
+import dagshub
 import seaborn as sns
 import matplotlib.pyplot as plt
 import mlflow.sklearn
@@ -7,6 +8,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, confusion_matrix
 
+# init dagshub
+dagshub.init(repo_owner='ronylpatil', repo_name='dagshub-testing', mlflow=True)
 
 # Load the iris dataset
 iris = load_iris()
@@ -20,10 +23,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 max_depth = 5
 
 # apply mlflow
-mlflow.set_tracking_uri('http://localhost:5000')
-mlflow.set_experiment('iris-dt')
+# mlflow.set_tracking_uri('http://localhost:5000')
+mlflow.set_experiment('iris-dt-dagshub')
 # adding experiment description
-experiment_description = ('training decision tree') 
+experiment_description = ('training decision tree - dagshub') 
 mlflow.set_experiment_tag('mlflow.note.content', experiment_description)
 
 with mlflow.start_run(description = 'Using decision tree - by ronil'):
